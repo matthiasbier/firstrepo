@@ -51,7 +51,8 @@ function ShowMultilineText(textData) {
     for (var d = startdate; d < enddate; d.setDate(d.getDate() + 1)) {
         dates.push(new Date(d).toLocaleDateString('de-De', dateoptions));
     }
-    textData = textData.replace(/@DayNo/g, "DayNo");
+    textData = textData.replace(/@/g, "");
+    
     var resv = JSON.parse(textData);
 
     var options = {
@@ -78,7 +79,7 @@ function ShowMultilineText(textData) {
                 }
                 var cssClass = "dayColumn class";
                 if (col >= 2) {
-                    if (rowData.Days.Day[col -2].DayNo != "frei") {
+                    if (rowData.Days.Day[col -2].DayNo.Reservation.EntryNo == "") {
                         cssClass += "0";
                     } else {
                         cssClass += "1";
@@ -86,13 +87,13 @@ function ShowMultilineText(textData) {
                 } else {
                     cssClass += "1";
                 }
-                if (rowData.Days.Day[col -1].DayNo != "frei") {
+                if (rowData.Days.Day[col -1].DayNo.Reservation.EntryNo == "") {
                     cssClass += "0";
                 } else {
                     cssClass += "1";
                 }
                 if (col < 11) {
-                    if (rowData.Days.Day[col].DayNo != "frei") {
+                    if (rowData.Days.Day[col].DayNo.Reservation.EntryNo == "") {
                         cssClass += "0";
                     } else {
                         cssClass += "1";
